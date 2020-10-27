@@ -1,6 +1,10 @@
 import pygame
 from Ball import Ball
 # from Paddle import paddle
+from random import randint
+from collections import namedtuple
+
+
 def main():
     pygame.init()
     pygame.display.set_caption("My Pong")
@@ -8,10 +12,13 @@ def main():
     # creat a surface
     WIDTH = 800
     HEIGHT = 400
-    BOARDER = 20
-    VELOCITY = 0.001
-    FPS = 30 #frame rate
+    BORDER = 20
+    VELOCITY = 1
+    FPS = 30  # frame rate
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+    MyConstants = namedtuple("MyConstants", ["WIDTH", "HEIGHT", "BORDER", "VELOCITY", "FPS"])
+    CONSTANTS = MyConstants(WIDTH, HEIGHT, BORDER, VELOCITY, FPS)
 
     # add solid background: r, g, b
     screen.fill((0, 0, 0))
@@ -19,31 +26,28 @@ def main():
     # avoid flikering
     pygame.display.update()
 
-    fgcolor = pygame.Color("White")
-    bgcolor = pygame.Color("Black")
+    fgcolor = pygame.Color("Yellow")  # ball color
+    bgcolor = pygame.Color("Black")  # background color
 
     # Draw walls as rectangles
     wcolor = pygame.Color("White")
     # top wall
-    pygame.draw.rect(screen, wcolor, pygame.Rect((0, 0), (WIDTH, BOARDER)))
+    pygame.draw.rect(screen, wcolor, pygame.Rect((0, 0), (WIDTH, BORDER)))
     # pygame.display.update()
     # left wall
-    pygame.draw.rect(screen, wcolor, pygame.Rect((0, 0), (BOARDER, HEIGHT)))
+    pygame.draw.rect(screen, wcolor, pygame.Rect((0, 0), (BORDER, HEIGHT)))
     # pygame.display.update()
     # bottom
-    pygame.draw.rect(screen, wcolor, pygame.Rect((0, HEIGHT - BOARDER), (WIDTH, BOARDER)))
+    pygame.draw.rect(screen, wcolor, pygame.Rect((0, HEIGHT - BORDER), (WIDTH, BORDER)))
     # pygame.display.update()
 
     # ball init
-    x0 = WIDTH - Ball.RADIUS
+    x0 = WIDTH - Ball.radius
     y0 = HEIGHT / 2
     vx0 = -VELOCITY
-    vy0 = 0
-    # TODO: +/- 45 degree random (calculate the random initilization)
-
-    b0 = Ball(x0, y0, vx0, vy0, screen, fgcolor, bgcolor)
+    vy0 = randint(-VELOCITY, VELOCITY)
+    b0 = Ball(x0, y0, vx0, vy0, screen, fgcolor, bgcolor, CONSTANTS)
     b0.show(fgcolor)
-
     pygame.display.update()
 
     # define a variable to control the main loop
@@ -68,5 +72,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-#TODO: push lab3 to git + capture a gif and include in README.md
