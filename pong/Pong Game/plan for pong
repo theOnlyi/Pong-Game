@@ -1,0 +1,15 @@
+finished the walls
+polling
+Ball
+
+Ball class:
+Variables:
+    Class:
+        radious of the ball
+    Instance:
+        calculate position of ball----> x, y values
+        color
+Methods:
+    show() #drawing the ball
+    update() #mobving the ball
+Paddle Class:
