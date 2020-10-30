@@ -5,14 +5,14 @@ class Ball:
     # pass
     radius = 10
 
-    def __init__(self, x, y, vx, vy, screen, fgcolor, bgcolor, constants):
+    def __init__(self, x, y, vx, vy, screen, color, bgcolor, constants):
         # instance variables
         self.x = x
         self.y = y
         self.vx = vx
         self.vy = vy
         self.screen = screen
-        self.fgcolor = fgcolor
+        self.color = color
         self.bgcolor = bgcolor
         self.constants = constants
 
@@ -37,5 +37,5 @@ class Ball:
             self.vy = -self.vy
         self.x = self.x + self.vx
         self.y = self.y + self.vy
-        self.show(self.fgcolor)
+        self.show(self.color)
         # pass
